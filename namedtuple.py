@@ -1,0 +1,1 @@
+# https://realpython.com/python-namedtuple/#:~:text=Python's%20namedtuple%20was%20created%20to,code%20cleaner%20and%20more%20maintainable.
