@@ -72,4 +72,8 @@ print(test_dict)
 print(dict_sort_by_param(test_dict, 'run_duration'))  
 print(dict_sort_by_param(test_dict, 'name'))  
 
+# sort list of tuples from dictionary
+lst = [(key, test_dict[key]['run_duration']) for key in test_dict.keys()]  
+lst.sort(key=lambda x: x[1], reverse=True)  
+print(lst)  
 
