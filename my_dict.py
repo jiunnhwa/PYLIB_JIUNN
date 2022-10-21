@@ -14,3 +14,47 @@ print ("first and last element:", dict( [ (list(dd.items()))[i] for i in (0, -1)
 lst = list(dd.items())
 print('------ lst items -----', lst)
 print('------ lst to dict -----', , dict([lst[0],lst[-1]] ))
+
+
+"""
+https://onecompiler.com/python/3ykcqykvb
+"""
+def hhmmss_to_seconds(hhmmss):
+    vals = hhmmss.split(':')
+    h = int(vals[0])
+    m = int(vals[1])
+    s = int(vals[2])
+    return (h*3600)+(m*60)+s    
+    
+def duration_sort(durations):
+    """ Returns the list of jobs ordered descendingly from durations converted to seconds  """
+    return sorted(list(enumerate(list(map(hhmmss_to_seconds, durations)))), key=lambda x: x[1], reverse=True)
+    
+   
+durations = ['00:15:00','00:06:00']    
+print(hhmmss_to_seconds('0:15:10'))
+print(duration_sort(durations))
+
+
+"""
+https://onecompiler.com/python/3ykjsc5py
+"""
+def duration_sort(arguments, durations):
+    """ returns the list of jobs ordered descendingly from durations converted to seconds  """
+    sorted_duras = sorted(list(enumerate(list(map(hhmmss_to_seconds, durations)))), key=lambda x: x[1], reverse=True)
+    return [arguments[item[0]] for item in sorted_duras], [durations[item[0]] for item in sorted_duras]
+
+arguments = ['A', 'B', 'C']
+durations = ['00:00:10', '00:11:00', '12:00:00']
+
+print(duration_sort(arguments, durations))
+
+  
+
+def dict_sort_by_param(dict_obj, sort_value, reverse=True):
+    """return a reverse(default) sorted dict by parameter"""
+    return {key: dict_obj[key] for key in sorted(dict_obj, key=lambda x: (dict_obj[x][sort_value]), reverse=reverse)}
+    # return dict(sorted(dict_obj.items(), key=lambda x: x[1][sort_value], reverse=reverse))
+    # sorted_builds = {key: builds[key] for key in sorted(builds, key=lambda x:(builds[x][sort_value]))}
+    # sorted_builds = {key: builds[key] for key in sorted(builds, key=lambda x:(builds[x].get(sort_value,0)))}
+    
