@@ -49,7 +49,10 @@ durations = ['00:00:10', '00:11:00', '12:00:00']
 
 print(duration_sort(arguments, durations))
 
-  
+
+"""
+https://onecompiler.com/python/3ykjsyez7
+"""
 
 def dict_sort_by_param(dict_obj, sort_value, reverse=True):
     """return a reverse(default) sorted dict by parameter"""
@@ -58,3 +61,15 @@ def dict_sort_by_param(dict_obj, sort_value, reverse=True):
     # sorted_builds = {key: builds[key] for key in sorted(builds, key=lambda x:(builds[x][sort_value]))}
     # sorted_builds = {key: builds[key] for key in sorted(builds, key=lambda x:(builds[x].get(sort_value,0)))}
     
+    
+test_dict = {
+              'Alpha' :  {'name' : 'Alpha',  'run_duration' : 10},
+              'Bravo' :  {'name' : 'Bravo',  'run_duration' : 200},
+              'Charlie' :{'name' : 'Charlie','run_duration' : 30},
+            }
+             
+print(test_dict)  
+print(dict_sort_by_param(test_dict, 'run_duration'))  
+print(dict_sort_by_param(test_dict, 'name'))  
+
+
