@@ -15,3 +15,9 @@ I think, therefore I am...
 """
 print(slice_text(text))
 print(slice_text(text,","))
+
+
+
+
+#removeprefix
+print( "Hello World".removeprefix('He').removesuffix('ld') )
