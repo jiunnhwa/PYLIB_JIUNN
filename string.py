@@ -1,4 +1,9 @@
+"""
 
+https://flexiple.com/python/python-ternary/
+
+
+"""
 
 def slice_text(text, keyword="."): 
   """ returns a slice by keyword len - 1 element"""  
