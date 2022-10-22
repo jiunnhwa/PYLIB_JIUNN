@@ -13,7 +13,7 @@ print ("first and last element:", dict( [ (list(dd.items()))[i] for i in (0, -1)
 
 lst = list(dd.items())
 print('------ lst items -----', lst)
-print('------ lst to dict -----', , dict([lst[0],lst[-1]] ))
+print('------ lst to dict -----', dict([lst[0],lst[-1]] ))
 
 
 """
@@ -77,3 +77,12 @@ lst = [(key, test_dict[key]['run_duration']) for key in test_dict.keys()]
 lst.sort(key=lambda x: x[1], reverse=True)  
 print(lst)  
 
+
+
+
+# make unique set
+lst = ['A', 'A', 10, 5, 5]
+print(list(dict.fromkeys(lst)))
+print(list(set(lst))) #order may not be preserved
+
+ 
