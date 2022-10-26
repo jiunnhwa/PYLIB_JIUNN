@@ -14,6 +14,8 @@ https://onecompiler.com/python/3yk6ezpct
 nice = True
 personality = ("mean", "nice")[nice]
 print("The stranger is", personality)
+# The stranger is nice
+
 
 is_nice = [True, False, None]
 # state = "nice" if is_nice else "not nice"
