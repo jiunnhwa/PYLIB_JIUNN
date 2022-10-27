@@ -92,17 +92,17 @@ sleepy_function(0.3)
 sleepy_function(0.5)
 
 
-
 def timer(func):
     def inner(*args, **kwargs):
         import time
+        from datetime import datetime
         start = time.perf_counter()
         start_time = datetime.now()
-        print(f'\n{"-"*30} START: {func.__name__}() at {start_time} {"-"*30}')
+        print(f'\n{"-"*30} START: {func.__name__}() at {start_time} {"-"*30}\n\n')
         func(*args, **kwargs)
         end = time.perf_counter()
         end_time = datetime.now()
-        # print('Stop...', datetime.now())
+        print(f'\n\n{"-"*30} METRICS: {"-"*30}')
         print(f"start_time: {start_time}")
         print(f"func_name: {func.__name__}")
         print(f"args: {args}")
