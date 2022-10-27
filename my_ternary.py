@@ -31,3 +31,13 @@ I came, I saw.
 """
 keyword = "came"
 print(('ok', 'ko' )[text is None or keyword not in text])
+print((text and keyword in text) or "ko")
+# ok
+# True
+
+text = ""
+print(('ok', 'ko' )[text is None or keyword not in text])
+print((text and keyword in text) or "ko")
+# ko
+# ko
+
