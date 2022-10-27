@@ -145,3 +145,96 @@ print(words ('C'))
 
 
 # -------------------------------------------------------------
+"""
+https://onecompiler.com/python/3ym5x7van
+"""
+
+text_no_if = """
+<TestFixture()> Public Class ClassA
+    Inherits GenericBaseTest
+End Class    
+"""
+text_if = """
+#If NUNIT3 Then
+<TestFixture()> Public Class Class_If_Nunit
+End Class
+#Else
+<TestFixture()> Public Class Class_Else_Nunit
+End Class
+#End If
+"""
+text_if_not = """
+#If not NUNIT3 Then
+<TestFixture()> Public Class Class_If_Not_Nunit
+End Class
+#Else
+<TestFixture()> Public Class Class_If_Not_Nunit_Else
+End Class
+#End If
+"""
+text_no_else = """
+#If NUNIT3 Then
+<TestFixture()> Public Class Class_If_Nunit_No_Else
+End Class
+#End If
+"""
+
+def get_nunit_active_class(hasdefineconst):
+    """
+    extract active class name based on presence of nunit compilation defines.
+    """
+
+    def get_class_name(txt):
+        val = txt.strip().split("End Class")[0].split(' Class ')[1]
+        return val.strip()
+
+    def post_process(txt):
+        return txt.replace("#End If", "").strip()
+
+    def inner(text):
+        val = ""
+        if "TestFixture" not in text:
+            return val
+        # cases with #if and #Else
+        if "#If NUNIT3" in text and "#Else" in text:
+            parts = text.split("#Else")
+            if hasdefineconst:
+                val = get_class_name(parts[0])
+            else:
+                val = get_class_name(parts[1])
+            return post_process(val)
+
+        # without #Else
+        if "#If NUNIT3" in text and "#Else" not in text:
+            if hasdefineconst:
+                val = get_class_name(text)
+            else:
+                val = ""
+            return post_process(val)
+
+        # containing #if not
+        if "#If not NUNIT3" in text and "#Else" in text:
+            parts = text.split("#Else")
+            if hasdefineconst:
+                val = get_class_name(parts[1])
+            else:
+                val = get_class_name(parts[0])
+            return post_process(val)
+
+        # cases without #if
+        return get_class_name(text).split("Inherits")[0].strip()
+
+    return inner
+
+if __name__ == "__main__":
+    define_constants = ['A', 'B', 'NUNIT3']
+    has_nunit =  get_nunit_active_class('NUNIT3' in define_constants)
+    
+    print("text_no_if:",has_nunit(text_no_if))
+    print("text_if:",has_nunit(text_if))
+    print("text_if_not:",has_nunit(text_if_not))
+    print("text_no_else:",has_nunit(text_no_else))
+
+
+# -------------------------------------------------------------
+
