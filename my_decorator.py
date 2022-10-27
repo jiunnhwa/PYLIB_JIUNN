@@ -56,17 +56,15 @@ def my_func(my_args):
 
 print(my_func(1))
 
-
-
-
-def logit(func):
+def func_caller(func):
+    import functools
     @functools.wraps(func)
-    def with_logging(*args, **kwargs):
-        print(func.__name__ + " was called")
+    def inner(*args, **kwargs):
+        print(func.__name__ + " called with", "args:", args, "kwargs:", kwargs)
         return func(*args, **kwargs)
-    return with_logging
+    return inner
 
-@logit
+@func_caller
 def addition_func(x):
    """Do some math."""
    return x + x
@@ -94,21 +92,43 @@ sleepy_function(0.3)
 sleepy_function(0.5)
 
 
-import time
 
 def timer(func):
     def inner(*args, **kwargs):
+        import time
         start = time.perf_counter()
+        start_time = datetime.now()
+        print(f'\n{"-"*30} START: {func.__name__}() at {start_time} {"-"*30}')
         func(*args, **kwargs)
         end = time.perf_counter()
-        print(f"{func.__name__}() took {end-start:.2f} secs.")
+        end_time = datetime.now()
+        # print('Stop...', datetime.now())
+        print(f"start_time: {start_time}")
+        print(f"func_name: {func.__name__}")
+        print(f"args: {args}")
+        print(f"kwargs: {kwargs}")
+        print(f"end_time: {end_time}")
+        print(f"Elapsed: {end-start:.4} secs.")
+        print(f'{"-"*30} END: {func.__name__}() at {datetime.now()} {"-"*30}\n')
     return inner
 
 
 @timer
+@func_caller #placed nearest to def
 def test_list_append(range_limit):
-    print('Start...')
     lst = [i**2 for i in range(range_limit)]
-    print('Stop...')
-
 test_list_append(1_000_000)    
+
+
+test_list_append(10)    
+# ------------------------------ START: test_list_append() at 2022-10-27 17:14:13.186839 ------------------------------
+# [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
+# start_time: 2022-10-27 17:14:13.186839
+# func_name: test_list_append
+# args: (10,)
+# kwargs: {}
+# end_time: 2022-10-27 17:14:13.187847
+# Elapsed: 0.0003649 secs.
+# ------------------------------ END: test_list_append() at 2022-10-27 17:14:13.187847 ------------------------------
+
+
