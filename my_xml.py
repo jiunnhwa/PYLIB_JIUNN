@@ -1,3 +1,9 @@
+"""
+https://lxml.de/tutorial.html
+https://towardsdatascience.com/processing-xml-in-python-elementtree-c8992941efd2
+
+"""
+
 
 text = """
 <?xml version="1.0" encoding="utf-8"?>
