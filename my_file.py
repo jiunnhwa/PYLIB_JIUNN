@@ -1,4 +1,9 @@
 
+def path_makedir(filename):
+    os.makedirs(os.path.dirname(filename), exist_ok=True)
+
+def path_join(*args):
+    return os.path.join(*args)
 
 
 def file_readlines(filename):
@@ -12,7 +17,14 @@ def file_readalltext(filename):
     with open(filename, "r") as file:
         return file.read()
 
-      
+
+def file_appendtext(filename, text):
+    """file append text,  creates dir if not exist"""
+    path_makedir(filename)
+    with open(filename, "a") as file_ptr:
+        file_ptr.write(text)
+
+        
 def file_writetext(filename, text):
     """file write text"""
     
