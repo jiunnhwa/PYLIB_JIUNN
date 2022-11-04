@@ -1,6 +1,11 @@
 import pandas as pd
 import numpy as np
 
+
+# https://www.geeksforgeeks.org/how-to-compare-two-columns-in-pandas/
+# https://www.geeksforgeeks.org/how-to-compare-two-dataframes-with-pandas-compare/
+
+
 details = {
 	'Column1': [1, 2, 3, 4],
 	'Column2': [7, 4, 2, 9],

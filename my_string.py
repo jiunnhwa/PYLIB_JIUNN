@@ -13,11 +13,11 @@ def slice_text(text, keyword="."):
 text = """
 I think, therefore I am...
 """
-print(slice_text(text))
-print(slice_text(text,","))
+# print(slice_text(text))
+# print(slice_text(text,","))
 
 
 
 
-#removeprefix
-print( "Hello World".removeprefix('He').removesuffix('ld') )
+# #removeprefix
+# print( "Hello World".removeprefix('He').removesuffix('ld') )
