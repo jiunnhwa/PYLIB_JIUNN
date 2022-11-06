@@ -28,7 +28,7 @@ def file_appendtext(filename, text):
 def file_writetext(filename, text):
     """file write text"""
     
-    makedirs(dirname(filename), exist_ok=True)
+    # makedirs(dirname(filename), exist_ok=True)
     with open(filename, "w") as file_ptr:
         file_ptr.write(text)
 
