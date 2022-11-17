@@ -20,3 +20,14 @@ df['New'] = df.apply(lambda x: x['Column1'] if x['Column1'] <= x['Column2'] and 
 
 # printing the dataframe
 print(df)
+
+
+
+
+
+
+
+df_to_tuples = lambda df: list(df.itertuples(index=False, name=None ))
+df_colnames_to_tuples = lambda df: tuple(list(df))
+df_merge = lambda dfx,dfy,on,how: pd.merge(dfx,dfy,on=on,how=how)# Merge DataFrames by Column
+df_astype = lambda df: df.astype({'colA':'string','colB':'int'})
