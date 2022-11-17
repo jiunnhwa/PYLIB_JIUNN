@@ -4,6 +4,7 @@ https://flexiple.com/python/python-ternary/
 
 
 """
+to_single_line = lambda lines: "".join([line.strip() for line in lines.splitlines()])
 
 def slice_text(text, keyword="."): 
   """ returns a slice by keyword len - 1 element"""  
