@@ -24,6 +24,12 @@ def path_join(*args):
     return os.path.join(*args)
 
 
+def file_delete(filename):
+    """delete file if exist """
+    if os.path.exists(filename):
+        os.remove(filename)
+
+
 def file_readlines(filename):
     """read file to lines """
     with open(filename, "r") as file_ptr:
@@ -50,6 +56,11 @@ def file_writetext(filename, text):
         file_ptr.write(text)
 
 
+def file_writelines(filename, datalist):
+    """file write list separated with newline"""
+    file_writetext(filename,"\n".join(datalist))
+
+
 def print_to_file(data, filename="_run.txt", filepath=""):
     """print to file, becomes append if file exists"""
     filepath = filepath if filepath else get_tempdir()
@@ -62,4 +73,5 @@ def UnitTest():
     ''' selective unit tests '''
     print(get_tempdir())
     print_to_file("test print to temp dir")
+    file_writelines("nums.txt", ['88103219', '88013219', '80866219'])
 
