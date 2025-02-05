@@ -2,7 +2,7 @@
 
 https://safjan.com/mastering-temporary-files-and-directories-with-python-tempfile-module/
 https://stackoverflow.com/questions/847850/cross-platform-way-of-getting-temp-directory-in-python
-
+https://stackoverflow.com/questions/273192/how-do-i-create-a-directory-and-any-missing-parent-directories
 
 '''
 import os
@@ -14,6 +14,13 @@ import tempfile
 def get_tempdir():
     tempdir = Path("/tmp" if platform.system() == "Darwin" else tempfile.gettempdir())
     return tempdir
+
+def path_mkdir(pathname="/my/directory"):
+    '''
+    create a directory at a given path, and also create any missing parent directories along that path
+    '''
+    from pathlib import Path
+    Path(pathname).mkdir(parents=True, exist_ok=True)
 
 
 def path_makedir(filename):
