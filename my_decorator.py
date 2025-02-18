@@ -132,3 +132,34 @@ test_list_append(10)
 # ------------------------------ END: test_list_append() at 2022-10-27 17:14:13.187847 ------------------------------
 
 
+
+
+#
+# // Timer decorator func
+#
+
+def timer(func):
+    '''
+    decorator function to measure time of execution
+    https://realpython.com/python-timer/
+    https://pynative.com/python-convert-seconds-to-hhmmss/    
+
+    usage:
+    @timer
+    def runner():
+        pass
+        
+    '''
+    import functools
+    import time
+    from datetime import timedelta
+
+    @functools.wraps(func)
+    def wrapper_timer(*args, **kwargs):
+        tic = time.perf_counter()
+        value = func(*args, **kwargs)
+        toc = time.perf_counter()
+        elapsed_time = toc - tic
+        print(f"Elapsed time: {elapsed_time:0.4f} seconds. hh:mm:ss:{timedelta(seconds=elapsed_time)}")
+        return value
+    return wrapper_timer
