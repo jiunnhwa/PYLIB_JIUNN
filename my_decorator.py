@@ -143,23 +143,24 @@ def timer(func):
     decorator function to measure time of execution
     https://realpython.com/python-timer/
     https://pynative.com/python-convert-seconds-to-hhmmss/    
-
-    usage:
-    @timer
-    def runner():
-        pass
-        
+    https://www.geeksforgeeks.org/time-perf_counter-function-in-python/
+    https://superfastpython.com/time-time-vs-time-perf_counter/
+    https://builtin.com/articles/timing-functions-python
     '''
     import functools
     import time
-    from datetime import timedelta
+    from datetime import timedelta,datetime
 
     @functools.wraps(func)
     def wrapper_timer(*args, **kwargs):
+        start_time = datetime.now()
         tic = time.perf_counter()
         value = func(*args, **kwargs)
-        toc = time.perf_counter()
-        elapsed_time = toc - tic
-        print(f"Elapsed time: {elapsed_time:0.4f} seconds. hh:mm:ss:{timedelta(seconds=elapsed_time)}")
+        end_time  = datetime.now()
+        toc  = time.perf_counter()
+        elapsed_time = toc  - tic
+        print(f"start_time:{start_time} end_time:{end_time}")
+        # print(f"Elapsed time: {elapsed_time:0.4f} seconds. (Timedelta in hh:mm:ss is {timedelta(seconds=elapsed_time)})")
+        print(f"Elapsed time is {timedelta(seconds=elapsed_time)} ({elapsed_time:0.4f} seconds {(elapsed_time/60):0.4f}) minutes.")
         return value
     return wrapper_timer
