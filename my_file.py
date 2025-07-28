@@ -9,7 +9,8 @@ import os
 from pathlib import Path
 import platform
 import tempfile
-
+import shutil
+import glob
 
 def get_tempdir():
     tempdir = Path("/tmp" if platform.system() == "Darwin" else tempfile.gettempdir())
@@ -28,7 +29,10 @@ def path_makedir(filename):
 
 
 def path_join(*args):
-    return os.path.join(*args)
+    """
+    eg: os.path.join(['home', 'user', 'documents', 'report.txt'])
+    """
+    return os.path.join(*args) # unpack using the * operator
 
 
 def file_delete(filename):
@@ -76,9 +80,44 @@ def print_to_file(data, filename="_run.txt", filepath=""):
         print(data, file=file_ptr)
 
 
+def save_as_json(df, outfile='output.json'):
+    # Convert DataFrame to JSON and save to a file
+    # The 'orient' parameter controls the JSON structure.
+    # 'records' is often a suitable choice for JSON files, as it represents each row as a separate JSON object.
+    df.to_json(outfile, orient='records', indent=4)
+
+
+def copy_all_files(source_folder, target_folder):
+    """
+    copy_all_files("source_folder", "target_folder")
+    """
+    for filename in os.listdir(source_folder):
+        source_file = os.path.join(source_folder, filename)
+        if os.path.isfile(source_file):
+            shutil.copy(source_file, target_folder)
+
+
+def copy_files_with_extension(source_folder, target_folder, extension):
+    """
+    copy_files_with_extension("source_folder", "target_folder", ".txt")
+    """
+    for filename in os.listdir(source_folder):
+        source_file = os.path.join(source_folder, filename)
+        if os.path.isfile(source_file) and filename.endswith(extension):
+            shutil.copy(source_file, target_folder)
+
+
+def copy_files_with_pattern(source_folder, target_folder, pattern):
+    """
+    copy_files_with_pattern('source_folder', 'target_folder', 'report_*')
+    """
+    for file_path in glob.glob(os.path.join(source_folder, pattern)):
+        if os.path.isfile(file_path):
+            shutil.copy(file_path, target_folder)
+
+
 def UnitTest():
     ''' selective unit tests '''
     print(get_tempdir())
     print_to_file("test print to temp dir")
     file_writelines("nums.txt", ['88103219', '88013219', '80866219'])
-
